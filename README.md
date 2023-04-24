@@ -4,7 +4,7 @@ A wordle version of the beloved card game, Slay the Spire. Given hints through-o
 
 ## Structure
 
-This project was made using the NextJS framework, it fetches the current time by using the free time api, (timeapi.io)[https://timeapi.io/], and then uses the date (mm/dd/yy) as a seed to an RNG to get the next daily card.
+This project was made using the NextJS framework, it fetches the current time by using the free time api, [timeapi.io](https://timeapi.io/), and then uses the date (mm/dd/yy) as a seed to an RNG to get the next daily card.
 
 Just like Wordle, it saves user data in local storage, which consists of the user's guesses, the time difference from their location and the location fetched from the API, and if they have already figured out what the daily card is.
 
