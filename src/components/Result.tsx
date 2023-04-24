@@ -47,7 +47,7 @@ const Result: React.FC<Props> = ({ result }) => {
   return (
     <Flipped flipId={result.card.name}>
       <div
-        className={`flex text-center items-center  animate-boom py-2 min-w-min gap-5 px-6 rounded-lg border-2 shadow-lg ${colorToBackground(
+        className={`flex text-center items-center first:animate-boom py-2 min-w-min gap-5 px-6 rounded-lg border-2 shadow-lg ${colorToBackground(
           card.color
         )}`}
       >

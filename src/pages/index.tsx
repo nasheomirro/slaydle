@@ -21,7 +21,7 @@ export default function Home({ daily, currentDate }: Data) {
     <MetaProvider daily={daily} measureDiff={new Date(currentDate)}>
       <main className="max-w-screen-lg py-5 mx-auto">
         <Link
-          className="block w-32 mb-3 hover:scale-110 transition-transform relative z-30"
+          className="block w-44 mb-3 mx-auto hover:scale-110 transition-transform"
           href={"/"}
         >
           <Image

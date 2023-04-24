@@ -1,5 +1,6 @@
 import { Card } from "@/lib/card.types";
 import { cards } from "@/lib/cards";
+import { useMetaContext } from "@/lib/meta";
 import { useCombobox } from "downshift";
 import { useState } from "react";
 
@@ -17,10 +18,13 @@ const filterCards = (input: string, blacklist: Card[]): Card[] => {
 };
 
 const GameInput: React.FC<Props> = ({ disabled, guess }) => {
-  const [guessed, setGuessed] = useState<Card[]>([]);
+  const { results } = useMetaContext();
   const [inputValue, setInputValue] = useState<string>("");
 
-  const items = filterCards(inputValue, guessed);
+  const items = filterCards(
+    inputValue,
+    results.map((result) => result.card)
+  );
 
   const {
     isOpen,
@@ -41,7 +45,6 @@ const GameInput: React.FC<Props> = ({ disabled, guess }) => {
           if (!selectedItem) break;
           setInputValue("");
           guess(selectedItem);
-          setGuessed((guessed) => [...guessed, selectedItem]);
           break;
         // map input change
         case useCombobox.stateChangeTypes.InputChange:

@@ -29,8 +29,20 @@ const getTimeDifference = (diff: number) => {
     .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 };
 
+const getTitle = (tries: number): string => {
+  if (tries <= 3) {
+    return "A20 GOD!";
+  } else if (tries <= 6) {
+    return "CA CAW!";
+  } else if (tries <= 10) {
+    return "Nice!";
+  } else {
+    return "You don't read cards, don't you..";
+  }
+};
+
 const AnswerOverlay: React.FC<Props> = ({ answer }) => {
-  const { timeDiff } = useMetaContext();
+  const { timeDiff, results } = useMetaContext();
   const [timeDifference, setTimeDifference] = useState(() =>
     getTimeDifference(timeDiff)
   );
@@ -47,8 +59,12 @@ const AnswerOverlay: React.FC<Props> = ({ answer }) => {
       <div className="z-0 absolute top-0 left-0 bottom-0 right-0 bg-black opacity-80"></div>
       <div className="overflow-y-auto animate-up relative w-screen h-screen flex p-5">
         <div className="w-72 text-2xl md:text-4xl text-center max-w-full z-20 relative my-auto mx-auto">
+          <span className="mb-6 text-3xl md:text-6xl block text-yellow-400">
+            {getTitle(results.length)}
+          </span>
           <span className="mb-4">Today&apos;s Card</span>
           <Image
+            loading="eager"
             src={answer.url}
             className="mb-4"
             alt="An image of the winning card"
