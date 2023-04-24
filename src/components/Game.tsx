@@ -1,16 +1,17 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Card, CompareResult } from "@/lib/card.types";
-import { compareCards, getCardByName, getRandomCard } from "@/lib/cards";
+import { compareCards } from "@/lib/cards";
 import Result from "./Result";
+import GameInput from "./GameInput";
 
 type Props = {
-  answer: Card
-}
+  answer: Card;
+};
 
 const Game: React.FC<Props> = ({ answer }) => {
   const [results, setResults] = useState<CompareResult[]>([]);
   const [hit, setHit] = useState(false);
-  
+
   // input enter
   const guess = (card: Card) => {
     const result = compareCards(answer, card);
@@ -21,20 +22,12 @@ const Game: React.FC<Props> = ({ answer }) => {
   const onHit = () => setHit(true);
 
   return (
-    <div className="max-w-screen-md mx-auto">
+    <div>
       <div className="mb-2">answer: {JSON.stringify(answer)}</div>
-      <div className="mb-2">correct: {hit}</div>
-      <input
-        disabled={hit}
-        className="block mb-2 border-black border"
-        onKeyDown={(e) => {
-          const card = getCardByName(e.currentTarget.value);
-          if (e.key === "Enter" && card) guess(card);
-        }}
-      />
+      <GameInput disabled={hit} guess={guess} />
       <div className="flex flex-col gap-2">
         {results.map((result) => (
-          <Result key={result.id} result={result} onHit={onHit} />
+          <Result key={result.card.name} result={result} onHit={onHit} />
         ))}
       </div>
     </div>

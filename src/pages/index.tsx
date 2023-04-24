@@ -13,7 +13,7 @@ export const getServerSideProps = async (): Promise<{ props: Data }> => {
 
 export default function Home({ daily }: Data) {
   return (
-    <main>
+    <main className="max-w-screen-lg mx-auto">
       <Game answer={daily} />
     </main>
   );

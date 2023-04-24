@@ -1,8 +1,8 @@
 export type Card = {
   name: string;
-  color: "Red" | "Green" | "Blue" | "Purple" | "Curse" | "Colorless";
-  type: "Attack" | "Skill" | "Power" | "Status" | "Curse";
-  rarity: "Basic" | "Common" | "Uncommon" | "Rare" | "Curse";
+  color: "Red" | "Green" | "Blue" | "Purple" | "Colorless";
+  type: "Attack" | "Skill" | "Power" | "Status";
+  rarity: "Basic" | "Common" | "Uncommon" | "Rare";
   cost: "0" | "1" | "2" | "3" | "4" | "5" | "X" | "None";
   description: string;
   keywords: string[];
@@ -16,7 +16,7 @@ export type Keyword = {
 };
 
 export type CompareResult = {
-  id: string;
+  card: Card;
   name: boolean;
   color: boolean;
   type: boolean;
