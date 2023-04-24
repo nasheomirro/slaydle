@@ -50,7 +50,7 @@ const Result: React.FC<Props> = ({ onHit, result }) => {
 
   return (
     <div
-      className={`flex text-center items-center py-2 px-6 rounded-lg border-2 shadow-lg ${colorToBackground(
+      className={`flex text-center items-center py-2 min-w-min gap-5 px-6 rounded-lg border-2 shadow-lg ${colorToBackground(
         card.color
       )}`}
     >

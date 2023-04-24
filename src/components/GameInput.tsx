@@ -51,28 +51,30 @@ const GameInput: React.FC<Props> = ({ disabled, guess }) => {
     },
   });
   return (
-    <div className="relative">
-      <input
-        className="block mb-10 border-b w-full max-w-sm text-center text-xl bg-transparent border-white focus:outline-none mx-auto"
-        {...getInputProps({ disabled })}
-      />
-      <ul
-        className={`${
-          isOpen && items.length ? "block" : "hidden"
-        } absolute w-72 overflow-scroll overflow-x-hidden mt-1 max-h-52`}
-        {...getMenuProps()}
-      >
-        {isOpen &&
-          items.map((item, index) => (
-            <li
-              className={`${highlightedIndex === index && "text-yellow-400"}`}
-              key={item.name}
-              {...getItemProps({ item, index })}
-            >
-              <span>{item.name}</span>
-            </li>
-          ))}
-      </ul>
+    <div className="p-2">
+      <div className="relative px-2 mb-5 md:mb-10">
+        <input
+          className="block border-b w-full max-w-sm text-center text-xl bg-transparent border-white focus:outline-none mx-auto"
+          {...getInputProps({ disabled })}
+        />
+        <ul
+          className={`${
+            isOpen && items.length ? "block" : "hidden"
+          } absolute max-w-sm w-full bg-slate-700 border-slate-500 rounded-lg border-2 overflow-y-auto p-2 overflow-x-hidden top-full mt-2 left-1/2 -translate-x-1/2`}
+          {...getMenuProps()}
+        >
+          {isOpen &&
+            items.slice(0, 7).map((item, index) => (
+              <li
+                className={`${highlightedIndex === index && "text-yellow-400"}`}
+                key={item.name}
+                {...getItemProps({ item, index })}
+              >
+                <span>{item.name}</span>
+              </li>
+            ))}
+        </ul>
+      </div>
     </div>
   );
 };

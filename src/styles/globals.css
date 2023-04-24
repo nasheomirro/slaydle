@@ -11,5 +11,5 @@ body {
 }
 
 body {
-  @apply min-h-screen text-lg text-white;
+  @apply min-h-screen text-base md:text-lg text-white;
 }

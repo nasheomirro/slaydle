@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Card, CompareResult } from "@/lib/card.types";
 import { compareCards } from "@/lib/cards";
-import Result from "./Result";
 import GameInput from "./GameInput";
+import Results from "./Results";
 
 type Props = {
   answer: Card;
@@ -23,13 +23,9 @@ const Game: React.FC<Props> = ({ answer }) => {
 
   return (
     <div>
-      <div className="mb-2">answer: {JSON.stringify(answer)}</div>
+      {/* <div className="mb-2">answer: {JSON.stringify(answer)}</div> */}
       <GameInput disabled={hit} guess={guess} />
-      <div className="flex flex-col gap-2">
-        {results.map((result) => (
-          <Result key={result.card.name} result={result} onHit={onHit} />
-        ))}
-      </div>
+      <Results results={results} onHit={onHit} />
     </div>
   );
 };
