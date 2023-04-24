@@ -1,18 +1,14 @@
 import { useEffect } from "react";
 import { Card, CompareResult } from "@/lib/card.types";
 import EnergyDisplay from "./EnergyDisplay";
+import { Flipped } from "react-flip-toolkit";
 
 type Props = {
   result: CompareResult;
-  onHit: () => void;
 };
 
-const Result: React.FC<Props> = ({ onHit, result }) => {
+const Result: React.FC<Props> = ({ result }) => {
   const { card } = result;
-  useEffect(() => {
-    if (result.name) onHit();
-  }, [onHit, result]);
-
   const emptyIfWin = (r: string) => {
     return !result.name ? r : "";
   };
@@ -49,62 +45,64 @@ const Result: React.FC<Props> = ({ onHit, result }) => {
   };
 
   return (
-    <div
-      className={`flex text-center items-center py-2 min-w-min gap-5 px-6 rounded-lg border-2 shadow-lg ${colorToBackground(
-        card.color
-      )}`}
-    >
-      <span
-        className={`inline-block w-full ${emptyIfWin(
-          result.name ? "text-yellow-300 font-bold" : "text-gray-300"
+    <Flipped flipId={result.card.name}>
+      <div
+        className={`flex text-center items-center  animate-boom py-2 min-w-min gap-5 px-6 rounded-lg border-2 shadow-lg ${colorToBackground(
+          card.color
         )}`}
       >
-        {card.name}
-      </span>
-      <span
-        className={`inline-block w-full ${emptyIfWin(
-          result.color ? "text-yellow-300 font-bold" : "text-gray-300"
-        )}`}
-      >
-        {colorToName(card.color)}
-      </span>
-      <span
-        className={`inline-block w-full ${emptyIfWin(
-          result.type ? "text-yellow-300 font-bold" : "text-gray-300"
-        )}`}
-      >
-        {card.type}
-      </span>
-      <span
-        className={`inline-block w-full ${emptyIfWin(
-          result.rarity ? "text-yellow-300 font-bold" : "text-gray-300"
-        )}`}
-      >
-        {card.rarity}
-      </span>
-      <span
-        className={`inline-block w-full ${emptyIfWin(
-          result.cost ? "text-yellow-300 font-bold" : "text-gray-300"
-        )}`}
-      >
-        <EnergyDisplay
-          color={card.color}
-          result={result.cost}
-          cost={card.cost}
-        />
-      </span>
-      <span
-        className={`inline-block w-full ${emptyIfWin(
-          result.keywords === "hit"
-            ? "text-yellow-300 font-bold"
-            : result.keywords === "partial"
-            ? "text-orange-300"
-            : "text-gray-300"
-        )}`}
-      >
-        {card.keywords.join(", ")}
-      </span>
-    </div>
+        <span
+          className={`inline-block w-full text-start ${emptyIfWin(
+            result.name ? "text-yellow-300 font-bold" : "text-gray-300"
+          )}`}
+        >
+          {card.name}
+        </span>
+        <span
+          className={`inline-block w-full ${emptyIfWin(
+            result.color ? "text-yellow-300 font-bold" : "text-gray-300"
+          )}`}
+        >
+          {colorToName(card.color)}
+        </span>
+        <span
+          className={`inline-block w-full ${emptyIfWin(
+            result.type ? "text-yellow-300 font-bold" : "text-gray-300"
+          )}`}
+        >
+          {card.type}
+        </span>
+        <span
+          className={`inline-block w-full ${emptyIfWin(
+            result.rarity ? "text-yellow-300 font-bold" : "text-gray-300"
+          )}`}
+        >
+          {card.rarity}
+        </span>
+        <span
+          className={`inline-block w-full ${emptyIfWin(
+            result.cost ? "text-yellow-300 font-bold" : "text-gray-300"
+          )}`}
+        >
+          <EnergyDisplay
+            color={card.color}
+            result={result.cost}
+            cost={card.cost}
+          />
+        </span>
+        <span
+          className={`inline-block w-full ${emptyIfWin(
+            result.keywords === "hit"
+              ? "text-yellow-300 font-bold"
+              : result.keywords === "partial"
+              ? "text-orange-300"
+              : "text-gray-300"
+          )}`}
+        >
+          {card.keywords.join(", ")}
+        </span>
+      </div>
+    </Flipped>
   );
 };
 
