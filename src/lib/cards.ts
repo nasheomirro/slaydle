@@ -5,25 +5,24 @@ import seedrandom from "seedrandom";
 export const cards = items.cards as Card[];
 export const keywords = items.keywords as Keyword[];
 
-export const getCardByName = (name: string) => {
-  const card = cards.find(
-    (card) => card.name.toLowerCase() === name.toLowerCase()
-  );
-  if (card) return card;
-};
-
 /**
  * using the current date as the seed for a random generator, we should
  * always get the same index whenever we get a random card.
  */
-export const getRandomCard = async () => {
-  const { date }: { date: string } = await fetch(
+export const getRandomCard = async (): Promise<{
+  card: Card;
+  currentDate: string;
+}> => {
+  const { date, dateTime }: { date: string; dateTime: string } = await fetch(
     "https://timeapi.io/api/Time/current/zone?timeZone=Europe/Amsterdam"
   ).then((res) => res.json());
   const gen = seedrandom(date);
+
   let index = Math.floor(gen() * cards.length);
-  // let index = Math.floor(Math.random() * cards.length);
-  return cards[index];
+  return {
+    card: cards[index],
+    currentDate: dateTime,
+  };
 };
 
 /**
